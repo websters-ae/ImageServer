@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Project folders
+Athoor.UnitTest/
+AthoorWebApp/images/
+AthoorWebApp/uploaded-documents/
