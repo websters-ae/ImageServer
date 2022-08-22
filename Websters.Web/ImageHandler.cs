@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Web;
 
-namespace ImageServer
+namespace Websters.Web
 {
     public class ImageHandler : IHttpHandler
     {
@@ -12,35 +12,12 @@ namespace ImageServer
 
         public void ProcessRequest(HttpContext context)
         {
-            // TODO: Cache
-            //string file = context.Server.MapPath(context.Request.FilePath.Replace(".ashx", ""));
-            //string filename = file.Substring(file.LastIndexOf('\\') + 1);
-            //string extension = file.Substring(file.LastIndexOf('.') + 1);
-
-            //CachingSection config = (CachingSection)context.GetSection("SoftwareArchitects/Caching");
-            //if (config != null)
-            //{
-            //    context.Response.Cache.SetExpires(DateTime.Now.Add(config.CachingTimeSpan));
-            //    context.Response.Cache.SetCacheability(HttpCacheability.Public);
-            //    context.Response.Cache.SetValidUntilExpires(false);
-
-            //    FileExtension fileExtension = config.FileExtensions[extension];
-            //    if (fileExtension != null)
-            //    {
-            //        context.Response.ContentType = fileExtension.ContentType;
-            //    }
-            //}
-
-            //context.Response.AddHeader("content-disposition", "inline; filename=" + filename);
-            //context.Response.WriteFile(file);
-
             string imagePath = context.Server.MapPath(context.Request.FilePath);
             try
             {
-                using (MemoryStream m = new MemoryStream())
                 using (Stream file = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
                 {
-                    // TODO: Check file format header and don't rely on file extension only which might be worng.
+                    // TODO: Check file format header and don't rely on file extension only, which might be worng.
                     using (MagickImageCollection images = new MagickImageCollection(file))
                     {
                         foreach (IMagickImage<ushort> image in images)

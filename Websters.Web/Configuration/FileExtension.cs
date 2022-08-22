@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace ImageServer
+namespace Websters.Web.Configuration
 {
     /// <summary>
     /// Configuration for a file extension
