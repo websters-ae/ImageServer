@@ -17,8 +17,9 @@ namespace Websters.Web
             CachingSection config = (CachingSection)context.GetSection("Websters/Caching");
             if (config != null)
             {
+                context.Response.Cache.SetMaxAge(config.CachingTimeSpan);
                 context.Response.Cache.SetExpires(DateTime.Now.Add(config.CachingTimeSpan));
-                context.Response.Cache.SetCacheability(HttpCacheability.Public);
+                context.Response.Cache.SetCacheability(HttpCacheability.Server);
                 context.Response.Cache.SetValidUntilExpires(false);
 
                 FileExtension fileExtension = config.FileExtensions[extension];
